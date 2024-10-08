@@ -2,15 +2,8 @@ name: Create Dev Test and Prod Environments
 # clean up the environment for the next demo
 #  clean up environment tasks for QA and Prod 
 
-on:
-  workflow_dispatch:
-    inputs:
-    
-     user_id:
-     description: AAD object id for the user
-     required: true 
-     default: [AAD object id]
-   
+'on':
+  - push
  #Do Not change these values
       
 
@@ -30,7 +23,7 @@ jobs:
       uses: microsoft/powerplatform-actions/create-environment@v0
       with:
         app-id: ${{secrets.CLIENT_ID}}
-        client-secret: ${{ secrets.PowerPlatformSPN }}
+        client-secret: ${{ secrets.PowerPlatformSPN}}
         tenant-id: ${{secrets.TENANT_ID}}
         name: PracTest1
         type: Developer
@@ -40,10 +33,10 @@ jobs:
       uses:  microsoft/powerplatform-actions/assign-user@v0
       with:
         app-id: ${{secrets.CLIENT_ID}}
-        client-secret: ${{ secrets.PowerPlatformSPN }}
+        client-secret: ${{ secrets.PowerPlatformSPN}}
         tenant-id: ${{secrets.TENANT_ID}}
         environment: 'https://PracTest1.dynamics.com'
-        user: ${{ github.event.inputs.user_id }}
+        user: ${{ secrets.user_id}}
         role: System Administrator
         
     
