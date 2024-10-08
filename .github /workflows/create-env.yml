@@ -2,8 +2,7 @@ name: Create Dev Test and Prod Environments
 # clean up the environment for the next demo
 #  clean up environment tasks for QA and Prod 
 
-on:
-  workflow_dispatch:
+on: push
     inputs:
     
      env_name:
