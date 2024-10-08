@@ -27,8 +27,8 @@ jobs:
           #app-id: '${{secrets.CLIENT_ID}}'
           #client-secret: '${{ secrets.PowerPlatformSPN}}'
           #tenant-id: '${{secrets.TENANT_ID}}'
-          user-name: ${{secret.USERNAME}}
-          password-secret: ${{ secrets.password}}
+          user-name: '${{secrets.USERNAME}}'
+          password-secret: '${{secrets.password}}'
           environment: 'https://PracTest1.dynamics.com'
           user: '${{ secrets.user_id}}'
           role: System Administrator
