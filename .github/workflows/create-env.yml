@@ -3,25 +3,13 @@ name: Create Dev Test and Prod Environments
 #  clean up environment tasks for QA and Prod 
 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ feature1 ]
+  workflow_dispatch:
     inputs:
     
-     env_name:
-     description: name for the environment to be created
-     required: true
-     default: PracTest
-     
-     client_id:
-     description: service principal client id
-     required: true
-     default: 6d8e8818-1b71-416b-8ce9-2ff19aed6445
-     
      user_id:
      description: AAD object id for the user
      required: true 
-     default: 687e7560-7f7e-4ca8-b0c3-a9edeb46e97f
+     default: [AAD object id]
    
  #Do Not change these values
       
@@ -44,9 +32,9 @@ jobs:
         app-id: ${{secrets.CLIENT_ID}}
         client-secret: ${{ secrets.PowerPlatformSPN }}
         tenant-id: ${{secrets.TENANT_ID}}
-        name: ${{ github.event.inputs.env_name}}
-        type: Sandbox
-        domain: ${{ github.event.inputs.env_name}}
+        name: PracTest1
+        type: Developer
+        domain: PracTest1
     
     - name: assign-user to developer environment
       uses:  microsoft/powerplatform-actions/assign-user@v0
@@ -54,7 +42,8 @@ jobs:
         app-id: ${{secrets.CLIENT_ID}}
         client-secret: ${{ secrets.PowerPlatformSPN }}
         tenant-id: ${{secrets.TENANT_ID}}
-        environment: 'https://${{ github.event.inputs.env_name}}.crm8.dynamics.com'
+        environment: 'https://PracTest1.dynamics.com'
         user: ${{ github.event.inputs.user_id }}
         role: System Administrator
         
+    
