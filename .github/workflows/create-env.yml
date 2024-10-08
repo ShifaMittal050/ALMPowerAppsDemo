@@ -13,18 +13,22 @@ jobs:
       - name: Create Developer Environment
         uses: microsoft/powerplatform-actions/create-environment@v0
         with:
-          app-id: '${{secrets.CLIENT_ID}}'
-          client-secret: '${{ secrets.PowerPlatformSPN}}'
-          tenant-id: '${{secrets.TENANT_ID}}'
+          #app-id: '${{secrets.CLIENT_ID}}'
+          #client-secret: '${{ secrets.PowerPlatformSPN}}'
+          #tenant-id: '${{secrets.TENANT_ID}}'
+          user-name: ${{secret.USERNAME}}
+          password-secret: ${{ secrets.password}}
           name: PracTest1
           type: Developer
           domain: PracTest1
       - name: assign-user to developer environment
         uses: microsoft/powerplatform-actions/assign-user@v0
         with:
-          app-id: '${{secrets.CLIENT_ID}}'
-          client-secret: '${{ secrets.PowerPlatformSPN}}'
-          tenant-id: '${{secrets.TENANT_ID}}'
+          #app-id: '${{secrets.CLIENT_ID}}'
+          #client-secret: '${{ secrets.PowerPlatformSPN}}'
+          #tenant-id: '${{secrets.TENANT_ID}}'
+          user-name: ${{secret.USERNAME}}
+          password-secret: ${{ secrets.password}}
           environment: 'https://PracTest1.dynamics.com'
           user: '${{ secrets.user_id}}'
           role: System Administrator
