@@ -2,7 +2,10 @@ name: Create Dev Test and Prod Environments
 # clean up the environment for the next demo
 #  clean up environment tasks for QA and Prod 
 
-on: push
+on: 
+  push:
+    branches:
+    - feature1
     inputs:
     
      env_name:
