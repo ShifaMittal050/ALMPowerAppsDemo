@@ -1,0 +1,30 @@
+name: Delete Envs Dev Test and Prod
+# clean up the environment for the next demo
+#  clean up environment tasks for QA and Prod 
+
+on:
+  workflow_dispatch:
+    inputs:
+        dev_env: 
+          description: 'url for the dev environment'
+          type: string
+          default: https://[hostname]Dev.crm.dynamics.com
+jobs:
+  Delete-Environments:
+    runs-on: ubuntu-latest
+    # or you can say runs-on: windows-latest
+    env:
+      RUNNER_DEBUG: 1
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        lfs: true
+        
+    - name: Delete Dev Environment
+      uses: microsoft/powerplatform-actions/delete-environment@v0
+      with:
+        app-id: ${{secrets.CLIENT_ID}}
+        client-secret: ${{ secrets.PowerPlatformSPN }}
+        tenant-id: ${{secrets.TENANT_ID}}
+        environment-url: ${{ inputs.dev_env }}
