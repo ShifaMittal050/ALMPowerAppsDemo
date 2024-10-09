@@ -28,7 +28,7 @@ jobs:
         environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
         user-name: 'ShifaMittal@acc0555.onmicrosoft.com'
         password-secret: ${{ secrets.password }}
-        solution-name: ALMTest
+        solution-name: ALMTest1
         solution-output-file: out/exported/ALMLab.zip
 
     - name: unpack-solution action
