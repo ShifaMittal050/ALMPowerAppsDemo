@@ -85,12 +85,5 @@ jobs:
       with:
         solution-folder: ${{ github.event.repository.name }}/Artifacts/ALMLab
         solution-target-folder: ${{ github.event.repository.name }}/Artifacts/ALMLab1
-        token: ${{ secrets.RepoCheckinToken }}
-        
-    # - name: branch-solution, prepare it for a PullRequest
-    #   uses: microsoft/powerplatform-actions/branch-solution@v0
-    #   with:
-    #     solution-folder: out/solutions/ALMLab
-    #     solution-target-folder: solutions/ALMLab
-    #     repo-token: ${{ secrets.Repo_Token }}
-    #     allow-empty-commit: true
+        token: ${{ secrets.REPOCHECKINTOKEN }}
+        allow-empty-commit: true
