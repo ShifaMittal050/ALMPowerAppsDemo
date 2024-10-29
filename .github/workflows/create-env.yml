@@ -1,6 +1,8 @@
 name: Create Dev Test and Prod Environments
-'on':
-  - push
+on:
+  workflow_dispatch:
+# 'on':
+#   - push
 jobs:
   Create-Environments:
     runs-on: ubuntu-latest
