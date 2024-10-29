@@ -13,9 +13,12 @@ jobs:
       with:
         lfs: true
         
-    - name: Install PAC
-      uses: ./actions-install
-      id: actions-install
+    # - name: Install PAC
+    #   uses: ./actions-install
+    #   id: actions-install
+
+    - name: Install Power Platform Tools
+      uses: microsoft/powerplatform-actions/actions-install@v1
 
     - name: who-am-i action
       uses: microsoft/powerplatform-actions/who-am-i@v0
