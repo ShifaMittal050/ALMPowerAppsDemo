@@ -30,26 +30,50 @@ jobs:
        # user-name: 'ShifaMittal@acc0555.onmicrosoft.com'
        # password-secret: ${{ secrets.password }}
         
-    - name: export-solution action
+    - name: export-solution-Managed action
       uses: microsoft/powerplatform-actions/export-solution@v0
       with:
         environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
-        user-name: 'ShifaMittal@acc0555.onmicrosoft.com'
-        password-secret: ${{ secrets.password }}
+        app-id: ${{ vars.CLIENT_ID }}
+        client-secret: ${{ secrets.PowerPlatformSPN1 }}
+        tenant-id: ${{ vars.TENANT_ID }}
         solution-name: ALMTest1
         solution-output-file: out/exported/ALMLab.zip
+        overwrite: true
+        managed: true
 
-    - name: unpack-solution action
+    - name: unpack-solution-Managed action
+      uses: microsoft/powerplatform-actions/unpack-solution@v0
+      with:
+        solution-file: out/exported/ALMLab.zip
+        solution-folder: out/solutions/ALMLab
+        solution-type: 'Managed'
+        overwrite-files: true
+        
+    - name: export-solution-Unmanaged action
+      uses: microsoft/powerplatform-actions/export-solution@v0
+      with:
+        environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
+        app-id: ${{ vars.CLIENT_ID }}
+        client-secret: ${{ secrets.PowerPlatformSPN1 }}
+        tenant-id: ${{ vars.TENANT_ID }}
+        solution-name: ALMTest1
+        solution-output-file: out/exported/ALMLab.zip
+        overwrite: true
+        managed: false
+
+    - name: unpack-solution-Unmanaged action
       uses: microsoft/powerplatform-actions/unpack-solution@v0
       with:
         solution-file: out/exported/ALMLab.zip
         solution-folder: out/solutions/ALMLab
         solution-type: 'Unmanaged'
         overwrite-files: true
-    - name: branch-solution, prepare it for a PullRequest
-      uses: microsoft/powerplatform-actions/branch-solution@v0
-      with:
-        solution-folder: out/solutions/ALMLab
-        solution-target-folder: solutions/ALMLab
-        repo-token: ${{ secrets.Repo_Token }}
-        allow-empty-commit: true
+        
+    # - name: branch-solution, prepare it for a PullRequest
+    #   uses: microsoft/powerplatform-actions/branch-solution@v0
+    #   with:
+    #     solution-folder: out/solutions/ALMLab
+    #     solution-target-folder: solutions/ALMLab
+    #     repo-token: ${{ secrets.Repo_Token }}
+    #     allow-empty-commit: true
