@@ -1,14 +1,15 @@
 name: Delete Envs Dev Test and Prod
 # clean up the environment for the next demo
 #  clean up environment tasks for QA and Prod 
-
 on:
   workflow_dispatch:
-    inputs:
-        dev_env: 
-          description: 'url for the dev environment'
-          type: string
-          default: https://[hostname]Dev.crm.dynamics.com
+# on:
+#   workflow_dispatch:
+#     inputs:
+#         dev_env: 
+#           description: 'url for the dev environment'
+#           type: string
+#           default: https://[hostname]Dev.crm.dynamics.com
 jobs:
   Delete-Environments:
     runs-on: ubuntu-latest
