@@ -14,7 +14,7 @@ jobs:
         lfs: true
 
     - name: who-am-i action
-      uses: microsoft/powerplatform-actions/who-am-i@v0
+      uses: microsoft/powerplatform-actions/who-am-i@v1.0.0
       with:
         environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
         app-id: ${{ vars.CLIENT_ID }}
