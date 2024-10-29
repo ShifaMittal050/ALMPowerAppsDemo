@@ -20,15 +20,13 @@ jobs:
     - name: Install Power Platform Tools
       uses: microsoft/powerplatform-actions/actions-install@v1
 
-    - name: who-am-i action
-      uses: microsoft/powerplatform-actions/who-am-i@v0
-      with:
-        environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
-        app-id: ${{ vars.CLIENT_ID }}
-        client-secret: ${{ secrets.PowerPlatformSPN1 }}
-        tenant-id: ${{ vars.TENANT_ID }}
-       # user-name: 'ShifaMittal@acc0555.onmicrosoft.com'
-       # password-secret: ${{ secrets.password }}
+    # - name: who-am-i action
+    #   uses: microsoft/powerplatform-actions/who-am-i@v0
+    #   with:
+    #     environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
+    #     app-id: ${{ vars.CLIENT_ID }}
+    #     client-secret: ${{ secrets.PowerPlatformSPN1 }}
+    #     tenant-id: ${{ vars.TENANT_ID }}
         
     - name: export-solution-Managed action
       uses: microsoft/powerplatform-actions/export-solution@v0
@@ -38,15 +36,15 @@ jobs:
         client-secret: ${{ secrets.PowerPlatformSPN1 }}
         tenant-id: ${{ vars.TENANT_ID }}
         solution-name: ALMTest1
-        solution-output-file: out/exported/ALMLab.zip
+        solution-output-file: ${{ github.event.repository.name }}/Artifacts/ALMLab.zip
         overwrite: true
         managed: true
 
     - name: unpack-solution-Managed action
       uses: microsoft/powerplatform-actions/unpack-solution@v0
       with:
-        solution-file: out/exported/ALMLab.zip
-        solution-folder: out/solutions/ALMLab
+        solution-file: ${{ github.event.repository.name }}/Artifacts/ALMLab.zip
+        solution-folder: ${{ github.event.repository.name }}/Artifacts/ALMLab
         solution-type: 'Managed'
         overwrite-files: true
         
@@ -58,35 +56,35 @@ jobs:
         client-secret: ${{ secrets.PowerPlatformSPN1 }}
         tenant-id: ${{ vars.TENANT_ID }}
         solution-name: ALMTest1
-        solution-output-file: out/exported/ALMLab.zip
+        solution-output-file: ${{ github.event.repository.name }}/Artifacts/ALMLab.zip
         overwrite: true
         managed: false
 
     - name: unpack-solution-Unmanaged action
       uses: microsoft/powerplatform-actions/unpack-solution@v0
       with:
-        solution-file: out/exported/ALMLab.zip
-        solution-folder: out/solutions/ALMLab
+        solution-file: ${{ github.event.repository.name }}/Artifacts/ALMLab.zip
+        solution-folder: ${{ github.event.repository.name }}/Artifacts/ALMLab
         solution-type: 'Unmanaged'
         overwrite-files: true
         
 
-    - name: Git Fetch and Commit 
-      run: |
-        git fetch --all  
-        git config --global user.email "no-reply@github.com"
-        git config --global user.name "GitHub Actions"
-        git checkout main
-        git add --all 
-        git commit -m "Updates from the Golden Source environment"
-        git remote set-url origin https://x-access-token:${{ secrets.Repo_Token }}@github.com/${{ github.repository }}
-        git push
+    # - name: Git Fetch and Commit 
+    #   run: |
+    #     git fetch --all  
+    #     git config --global user.email "no-reply@github.com"
+    #     git config --global user.name "GitHub Actions"
+    #     git checkout main
+    #     git add --all 
+    #     git commit -m "Updates from the Golden Source environment"
+    #     git remote set-url origin https://x-access-token:${{ secrets.Repo_Token }}@github.com/${{ github.repository }}
+    #     git push
         
     - name: Prepare solution changes for check-in into source control
       uses: microsoft/powerplatform-actions/branch-solution@v1
       with:
-        solution-folder: 'out/solutions/solution one'
-        solution-target-folder: 'src/solutions/solution1'
+        solution-folder: ${{ github.event.repository.name }}/Artifacts/ALMLab
+        solution-target-folder: ${{ github.event.repository.name }}/Artifacts/ALMLab1
         token: ${{ secrets.Repo_Token }}
         
     # - name: branch-solution, prepare it for a PullRequest
