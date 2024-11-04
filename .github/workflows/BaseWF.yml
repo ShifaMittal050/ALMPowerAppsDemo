@@ -15,6 +15,6 @@ jobs:
 
     - name: Call Trigger workflow
       #uses: ShifaMittal050/libraryRepo/.github/workflows/reusable-workflow.yml@main
-      uses: ShifaMittal050/ALMPowerAppsDemo/.github/workflows/Trigger-workflow.yml@main
+      uses: ./.github/workflows/Trigger-workflow.yml@main
       with:
        message: “Triggered Flow”
