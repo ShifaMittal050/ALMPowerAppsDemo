@@ -15,6 +15,6 @@ jobs:
 
     - name: Call Trigger workflow
       #uses: <username>/libraryRepo/.github/workflows/reusable-workflow.yml@main
-      uses: .github/workflows/Trigger-workflow.yml@main
+      uses: libraryRepo/.github/workflows/Trigger-workflow.yml@main
       with:
        message: “Triggered Flow”
