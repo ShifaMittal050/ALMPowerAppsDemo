@@ -11,7 +11,10 @@ jobs:
     - uses: actions/checkout@v2
       with:
         lfs: true
-        
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"   
+      
     # - name: Install PAC
     #   uses: ./actions-install
     #   id: actions-install
@@ -35,37 +38,37 @@ jobs:
         client-secret: ${{ secrets.PowerPlatformSPN1 }}
         tenant-id: ${{ vars.TENANT_ID }}
         solution-name: ALMTest1
-        solution-output-file: ${{ github.event.repository.name }}/Artifacts/ALMLab.zip
+        solution-output-file: ${{ github.event.repository.name }}/Artifacts/${{ steps.date.outputs.date }}/Managed/ALMLab.zip
         overwrite: true
         managed: true
 
     - name: unpack-solution-Managed action
       uses: microsoft/powerplatform-actions/unpack-solution@v0
       with:
-        solution-file: ${{ github.event.repository.name }}/Artifacts/ALMLab.zip
-        solution-folder: ${{ github.event.repository.name }}/Artifacts/ALMLab
+        solution-file: ${{ github.event.repository.name }}/Artifacts/${{ steps.date.outputs.date }}/Managed/ALMLab.zip
+        solution-folder: ${{ github.event.repository.name }}/Artifacts/${{ steps.date.outputs.date }}/Managed/ALMLab
         solution-type: 'Managed'
         overwrite-files: true
         
-    # - name: export-solution-Unmanaged action
-    #   uses: microsoft/powerplatform-actions/export-solution@v0
-    #   with:
-    #     environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
-    #     app-id: ${{ vars.CLIENT_ID }}
-    #     client-secret: ${{ secrets.PowerPlatformSPN1 }}
-    #     tenant-id: ${{ vars.TENANT_ID }}
-    #     solution-name: ALMTest1
-    #     solution-output-file: ${{ github.event.repository.name }}/Artifacts/ALMLab.zip
-    #     overwrite: true
-    #     managed: false
+    - name: export-solution-Unmanaged action
+      uses: microsoft/powerplatform-actions/export-solution@v0
+      with:
+        environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
+        app-id: ${{ vars.CLIENT_ID }}
+        client-secret: ${{ secrets.PowerPlatformSPN1 }}
+        tenant-id: ${{ vars.TENANT_ID }}
+        solution-name: ALMTest1
+        solution-output-file: ${{ github.event.repository.name }}/Artifacts/${{ steps.date.outputs.date }}/Unmanaged/ALMLab.zip
+        overwrite: true
+        managed: false
 
-    # - name: unpack-solution-Unmanaged action
-    #   uses: microsoft/powerplatform-actions/unpack-solution@v0
-    #   with:
-    #     solution-file: ${{ github.event.repository.name }}/Artifacts/ALMLab.zip
-    #     solution-folder: ${{ github.event.repository.name }}/Artifacts/ALMLab
-    #     solution-type: 'Unmanaged'
-    #     overwrite-files: true
+    - name: unpack-solution-Unmanaged action
+      uses: microsoft/powerplatform-actions/unpack-solution@v0
+      with:
+        solution-file: ${{ github.event.repository.name }}/Artifacts/${{ steps.date.outputs.date }}/Unmanaged/ALMLab.zip
+        solution-folder: ${{ github.event.repository.name }}/Artifacts/${{ steps.date.outputs.date }}/Unmanaged/ALMLab
+        solution-type: 'Unmanaged'
+        overwrite-files: true
         
 
     - name: Git Fetch and Commit 
