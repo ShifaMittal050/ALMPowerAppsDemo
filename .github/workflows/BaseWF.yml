@@ -1,0 +1,20 @@
+# .github/workflows/trigger-workflow.yml in clientRepo
+name: Base Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+ call-workflow:
+  runs-on: ubuntu-latest
+
+  steps:
+    - uses: actions/checkout@v2
+      with:
+        lfs: true
+
+    - name: Call Trigger workflow
+      #uses: <username>/libraryRepo/.github/workflows/reusable-workflow.yml@main
+      uses: .github/workflows/Trigger-workflow.yml@main
+      with:
+       message: “Triggered Flow”
