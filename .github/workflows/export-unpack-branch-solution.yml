@@ -76,7 +76,7 @@ jobs:
         git checkout main
         git add --all 
         git commit -m "Updates from the Golden Source environment"
-        git remote set-url origin https://x-access-token:${{ secrets.REPOCHECKINTOKEN }}@github.com/${{ github.repository }}
+        git remote set-url origin https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/${{ github.repository }}
         git push
         
     # - name: Prepare solution changes for check-in into source control
