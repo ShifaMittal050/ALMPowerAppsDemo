@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml version="9.2.24101.166" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.24101.166" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.24103.00192">
+  <SolutionManifest>
+    <UniqueName>ALMTest1</UniqueName>
+    <LocalizedNames>
+      <LocalizedName description="ALMTest1" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions />
+    <Version>1.0.0.0</Version>
+    <Managed>0</Managed>
+    <Publisher>
+      <UniqueName>almtest</UniqueName>
+      <LocalizedNames>
+        <LocalizedName description="ALMTest" languagecode="1033" />
+      </LocalizedNames>
+      <Descriptions>
+        <Description description="ALMTest" languagecode="1033" />
+      </Descriptions>
+      <EMailAddress xsi:nil="true"></EMailAddress>
+      <SupportingWebsiteUrl xsi:nil="true"></SupportingWebsiteUrl>
+      <CustomizationPrefix>almtest</CustomizationPrefix>
+      <CustomizationOptionValuePrefix>74876</CustomizationOptionValuePrefix>
+      <Addresses>
+        <Address>
+          <AddressNumber>1</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+        <Address>
+          <AddressNumber>2</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+      </Addresses>
+    </Publisher>
+    <RootComponents>
+      <RootComponent type="1" schemaName="almtest_leaverequest" behavior="0" />
+      <RootComponent type="62" schemaName="almtest_LeaveRequestApp" behavior="0" />
+      <RootComponent type="80" schemaName="almtest_LeaveRequestApp" behavior="0" />
+    </RootComponents>
+    <MissingDependencies>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="almtest_approvalstatus" displayName="Approval status" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="almtest_leaverequestid" displayName="LeaveRequest" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="almtest_totalnumberofdays" displayName="Total number of days" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="createdby" displayName="Created By" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="createdon" displayName="Created On" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="createdonbehalfby" displayName="Created By (Delegate)" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="importsequencenumber" displayName="Import Sequence Number" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="modifiedby" displayName="Modified By" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="modifiedon" displayName="Modified On" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="modifiedonbehalfby" displayName="Modified By (Delegate)" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="overriddencreatedon" displayName="Record Created On" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="ownerid" displayName="Owner" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="owningbusinessunit" displayName="Owning Business Unit" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="owningteam" displayName="Owning Team" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="owninguser" displayName="Owning User" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="statecode" displayName="Status" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="statuscode" displayName="Status Reason" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="timezoneruleversionnumber" displayName="Time Zone Rule Version Number" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="utcconversiontimezonecode" displayName="UTC Conversion Time Zone Code" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="2" schemaName="versionnumber" displayName="Version Number" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="26" schemaName="LeaveRequest Associated View" displayName="LeaveRequest Associated View" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" id="{294080c0-4ee5-4405-bc13-9b1bb5cae932}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="26" schemaName="LeaveRequest Lookup View" displayName="LeaveRequest Lookup View" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" id="{3ed55a58-ef8f-4371-872b-88378ed95665}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="26" schemaName="Quick Find Active LeaveRequests" displayName="Quick Find Active LeaveRequests" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" id="{7e203e5d-1103-4443-9031-a011e2769fd4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="26" schemaName="My LeaveRequests" displayName="My LeaveRequests" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" id="{9e268587-7185-ef11-ac21-000d3af2f0ff}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="26" schemaName="LeaveRequest Advanced Find View" displayName="LeaveRequest Advanced Find View" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" id="{a2cb3117-f38d-43df-a860-710fdc410d64}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="26" schemaName="Active LeaveRequests" displayName="Active LeaveRequests" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" id="{c3600673-8db8-427f-9472-742f3da794d7}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="26" schemaName="Inactive LeaveRequests" displayName="Inactive LeaveRequests" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" id="{d8fbbeae-d427-4bf8-9a6f-f33003ac10f7}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="60" displayName="Information" parentDisplayName="LeaveRequest" id="{3a2edb0b-51e5-4fcd-a338-5a7a9455616b}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="60" displayName="Information" parentDisplayName="LeaveRequest" id="{582d93c3-7eb3-4907-8ce9-d27555d93a51}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="60" displayName="Information" parentDisplayName="LeaveRequest" id="{aac07296-9078-426f-83ee-b0436be1a06e}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="62" schemaName="almtest_LeaveRequestApp" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="68" id="{17a7c2c1-0300-40f9-bb03-5b55af6ee7ab}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="almtest_leaverequest" displayName="LeaveRequest" solution="Active" />
+        <Dependent type="80" schemaName="almtest_LeaveRequestApp" displayName="LeaveRequestApp" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="almtest_typeofleave" displayName="Type of leave" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" solution="Active" />
+        <Dependent type="26" schemaName="LeaveRequest Associated View" displayName="LeaveRequest Associated View" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" id="{294080c0-4ee5-4405-bc13-9b1bb5cae932}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="almtest_typeofleave" displayName="Type of leave" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" solution="Active" />
+        <Dependent type="26" schemaName="LeaveRequest Lookup View" displayName="LeaveRequest Lookup View" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" id="{3ed55a58-ef8f-4371-872b-88378ed95665}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="almtest_typeofleave" displayName="Type of leave" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" solution="Active" />
+        <Dependent type="26" schemaName="Quick Find Active LeaveRequests" displayName="Quick Find Active LeaveRequests" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" id="{7e203e5d-1103-4443-9031-a011e2769fd4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="almtest_typeofleave" displayName="Type of leave" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" solution="Active" />
+        <Dependent type="26" schemaName="LeaveRequest Advanced Find View" displayName="LeaveRequest Advanced Find View" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" id="{a2cb3117-f38d-43df-a860-710fdc410d64}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="almtest_typeofleave" displayName="Type of leave" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" solution="Active" />
+        <Dependent type="26" schemaName="Active LeaveRequests" displayName="Active LeaveRequests" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" id="{c3600673-8db8-427f-9472-742f3da794d7}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="almtest_typeofleave" displayName="Type of leave" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" solution="Active" />
+        <Dependent type="26" schemaName="Inactive LeaveRequests" displayName="Inactive LeaveRequests" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" id="{d8fbbeae-d427-4bf8-9a6f-f33003ac10f7}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="almtest_typeofleave" displayName="Type of leave" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" solution="Active" />
+        <Dependent type="60" displayName="Information" parentDisplayName="LeaveRequest" id="{3a2edb0b-51e5-4fcd-a338-5a7a9455616b}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="almtest_typeofleave" displayName="Type of leave" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" solution="Active" />
+        <Dependent type="60" displayName="Information" parentDisplayName="LeaveRequest" id="{582d93c3-7eb3-4907-8ce9-d27555d93a51}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="almtest_typeofleave" displayName="Type of leave" parentSchemaName="almtest_leaverequest" parentDisplayName="LeaveRequest" solution="Active" />
+        <Dependent type="60" displayName="Information" parentDisplayName="LeaveRequest" id="{aac07296-9078-426f-83ee-b0436be1a06e}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)" />
+        <Dependent type="80" schemaName="almtest_LeaveRequestApp" displayName="LeaveRequestApp" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.12)" id.uniquename="AppChannel">
+          <package>PowerAppsAppFramework_Anchor (1.0.0.16)</package>
+        </Required>
+        <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=almtest_LeaveRequestApp,settingdefinitionid.uniquename=AppChannel" id.parentappmoduleid.uniquename="almtest_LeaveRequestApp" id.settingdefinitionid.uniquename="AppChannel" />
+      </MissingDependency>
+    </MissingDependencies>
+  </SolutionManifest>
+</ImportExportXml>

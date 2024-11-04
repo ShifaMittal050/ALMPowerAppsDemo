@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{aac07296-9078-426f-83ee-b0436be1a06e}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab verticallayout="true" id="{b714fccf-ace3-43c6-a432-98e44efd3e07}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{00f0a815-e2fd-4f33-95ed-58aad1c52fb4}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{26e28316-4b0e-4ceb-8011-f0f156988dfc}">
+                        <labels>
+                          <label description="Type of leave" languagecode="1033" />
+                        </labels>
+                        <control id="almtest_typeofleave" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="almtest_typeofleave" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{3e2b6547-add3-4d17-a79b-5b7d3c8dd979}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{3795a7a7-7332-4538-8b45-73d72f5b7a1b}">
+                        <labels>
+                          <label description="Total number of days" languagecode="1033" />
+                        </labels>
+                        <control id="almtest_totalnumberofdays" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="almtest_totalnumberofdays" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{d1f93145-1e21-4013-9da4-bf27ac367048}">
+                        <labels>
+                          <label description="Approval status" languagecode="1033" />
+                        </labels>
+                        <control id="almtest_approvalstatus" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="almtest_approvalstatus" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>
