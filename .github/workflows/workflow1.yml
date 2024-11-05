@@ -14,12 +14,12 @@ on:
       workflow2_github_account:
         description: 'GitHub Account Owner'
         required: true
-        default: 'sumitraj0103'
+        default: 'ShifaMittal050'
       
       workflow2_repo_github:
         description: 'GitHub Repository Name'
         required: true
-        default: 'Letsdevops'
+        default: 'ALMPowerAppsDemo'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -28,7 +28,7 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     env: 
-      pat_token: ${{ secrets.Workflow2_PAT_TOKEN_GITHUB }}
+      pat_token: ${{ secrets.REPO_TOKEN }}
       payload_Baseline_Number: "BSL_001"
       payload_Baseline_Revision: "zsfdgsdbgngffdwdx1dxvv2"
 
@@ -53,4 +53,3 @@ jobs:
         run: |
          cd "$GITHUB_WORKSPACE/Deployment-Scripts/"
          python $GITHUB_WORKSPACE/Deployment-Scripts/workflow_trigger.py ${{ env.pat_token }}  ${{ github.event.inputs.workflow2_github_account}}  ${{ github.event.inputs.workflow2_repo_github}} ${{ github.event.inputs.workflow2_name}} ${{ env.payload_Baseline_Number }} ${{ env.payload_Baseline_Revision }}
-    
