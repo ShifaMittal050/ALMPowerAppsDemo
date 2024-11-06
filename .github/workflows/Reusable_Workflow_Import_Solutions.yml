@@ -1,0 +1,140 @@
+name: reusable_workflow_import_solutions_to_target_env
+# Import multiple solution  to target envrionment  
+on:
+  workflow_call:
+    inputs:
+      solution_names:
+        description: 'JSON array of solution names'
+        type: string
+        required: true
+     
+      solution_type:
+        description: 'Managed or Unmanaged'
+        type: string
+        required: true
+      
+      deployment_type:
+        description: 'Update or Upgrade'
+        type: string
+        required: true
+        
+      target_env:
+        description: "Target environment ex: DEV/TEST/UAT/PROD"
+        required: true
+        type: string
+        
+      # async_deployment:
+      #   description: "Import solutions asynchronously"
+      #   required: true
+      #   type: string
+
+      async_timeout:
+        description: "Maximum wait time in minutes for asynchronous import"
+        required: true
+        type: string
+    #secrets:
+      # target_env_url:
+      #   description: "Maximum wait time in minutes for asynchronous import"
+      #   required: true
+      # client_secret:
+      #   description: "Maximum wait time in minutes for asynchronous import"
+      #   required: true
+      # client_id:
+      #   description: "Maximum wait time in minutes for asynchronous import"
+      #   required: true
+      # tenant_id:
+      #   description: "Maximum wait time in minutes for asynchronous import"
+      #   required: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  # Folders
+  release_folder: out/release 
+  solution_folder: Solutions
+  # target_env_url: ${{ inputs.target_env_url }}
+  # client_id: ${{ secrets.client_id }}
+  # client_secret: ${{ secrets.SP_SECRET }}
+  # tenant_id: ${{ secrets.TENANT_ID }}
+
+jobs:
+  import-solution-to-target-env:
+    strategy:
+      max-parallel: 1
+      matrix:
+        solution_name: ["HR_Digital_Assistant_EmployeeBot","HR_Digital_Assistant_CandidateBot","HRDigitalAssistantDev"]
+    runs-on: Windows-latest
+    environment:
+      name: ${{ github.event.inputs.target_env }} 
+
+    steps:
+    
+      - uses: actions/checkout@v3
+        with:
+          lfs: true
+
+      - name: Install Power Platform Tools
+        uses: microsoft/powerplatform-actions/actions-install@v1
+      
+      # - name: Pack solutions
+      #   uses: microsoft/powerplatform-actions/pack-solution@v0
+      #   with:
+      #    solution-folder: ${{env.solution_folder }}/${{ matrix.solution_name }}
+      #    solution-file: ${{env.release_folder }}/${{ matrix.solution_name }}.zip
+      #    solution-type:  ${{inputs.solution_type }}
+        
+      # - name: Import solution as Update to target environment
+      #   if: ${{ inputs.deployment_type == 'Update' }}
+      #   uses: microsoft/powerplatform-actions/import-solution@v0
+      #   with:
+      #     environment-url: ${{ inputs.target_env_url }}
+      #     solution-file: ${{ env.release_folder }}/${{ matrix.solution_name }}.zip
+      #     force-overwrite: true
+      #     app-id: ${{ inputs.client_id }}
+      #     client-secret: ${{ inputs.client_secret }}
+      #     tenant-id: ${{ inputs.tenant_id }}
+      #     use-deployment-settings-file: true
+      #     deployment-settings-file: .github/workflows/${{ github.event.inputs.target_env }}/${{ matrix.solution_name }}.json
+      #     run-asynchronously: ${{ inputs.async_deployment }}
+      #     max-async-wait-time: ${{ inputs.async_timeout }}
+      #     activate-plugins: 'true'
+
+      # - name: Import solution as holding for Upgrade to target environment
+      #   if: ${{ inputs.deployment_type == 'Upgrade' }}
+      #   uses: microsoft/powerplatform-actions/import-solution@v0
+      #   with:
+      #     environment-url: ${{ env.target_env_url }}
+      #     solution-file: ${{ env.release_folder }}/${{ matrix.solution_name }}.zip
+      #     force-overwrite: true
+      #     app-id: ${{ inputs.client_id }}
+      #     client-secret: ${{ inputs.client_secret }}
+      #     tenant-id: ${{ inputs.tenant_id }}
+      #     import-as-holding: true
+      #     use-deployment-settings-file: true
+      #     deployment-settings-file: .github/workflows/${{ github.event.inputs.target_env }}/${{ matrix.solution_name }}.json
+      #     run-asynchronously: ${{ inputs.async_deployment }}
+      #     max-async-wait-time: ${{ inputs.async_timeout }}
+      #     activate-plugins: 'true'
+
+      # - name: Upgrade solution at target environment
+      #   if: ${{ inputs.deployment_type == 'Upgrade' }}
+      #   uses: microsoft/powerplatform-actions/upgrade-solution@v0.10.3
+      #   with:
+      #     environment-url: ${{ inputs.target_env_url }}
+      #     app-id: ${{ inputs.client_id }}
+      #     client-secret:  ${{ inputs.client_secret }}
+      #     tenant-id: ${{ inputs.tenant_id }}
+      #     solution-name: ${{ matrix.solution_name }}
+      #     async: ${{ inputs.async_deployment }}
+      #     max-async-wait-time: ${{ inputs.async_timeout }}
+      #     activate-plugins: 'true'
+
+      # - name: Publish Solution
+      #   uses: microsoft/powerplatform-actions/publish-solution@v1
+      #   with:
+      #    environment-url: ${{ inputs.target_env_url }}
+      #    app-id: ${{ inputs.client_id }}
+      #    client-secret:  ${{ inputs.client_secret }}
+      #    tenant-id: ${{ inputs.tenant_id }}
