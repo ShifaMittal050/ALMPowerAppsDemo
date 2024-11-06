@@ -1,0 +1,72 @@
+name: caller_workflow_import_solutions_to_target_env
+
+on:
+  workflow_dispatch:
+    inputs:
+    
+      solution_names:
+        description: "JSON array of solution names"
+        required: true
+        type: string
+        default: '["HRDigitalAssistantDev","HR_Digital_Assistant_CandidateBot","HR_Digital_Assistant_EmployeeBot"]'
+
+      solution_type:
+        description: "Type of solution: Managed or Unmanaged, In most cases it will be managed. unmanaged if you are moving solution between dev environments"
+        type: choice
+        required: true
+        options: 
+        - Managed
+        - Unmanaged
+ 
+      target_env:
+        description: "Target envrionment name(e.g. DEV, TEST, UAT, PROD)"
+        type: choice
+        required: true
+        options:
+          - Test
+          - UAT
+          - PROD
+
+      deployment_type:
+        description: "Update or Upgrade"
+        type: choice
+        required: true
+        options:
+          - Upgrade
+          - Update
+          
+        
+      # run_asynchronously:
+      #   description: "Imports solution asynchronously"
+      #   type: choice
+      #   required: true
+      #   options:
+      #     - True
+      #     - False
+          
+      async_timeout:
+        description: "Maximum wait time in minutes for asynchronous import"
+        required: true
+        type: string
+        default: '60' 
+
+      
+permissions:
+  contents: write
+  pull-requests: write
+  
+jobs:
+  call-reusable_workflow_pack_solutions_to_target_env:
+     uses: ./.github/workflows/Reusable_Workflow_Import_Solutions.yml
+     with:
+       solution_names: ${{ github.event.input.solution_name }}
+       target_env: ${{ github.event.inputs.target_env }}
+       deployment_type: ${{ github.event.inputs.deployment_type }}
+       #async_deployment: ${{ github.event.inputs.run_asynchronously }}
+       async_timeout: ${{ github.event.inputs.async_timeout }}
+       solution_type:  ${{ inputs.solution_type }}
+     # secrets:
+     #   target_env_url: ${{ secrets.ENVIRONMENT_URL }}
+     #   client_id: ${{ secrets.APP_ID }}
+     #   client_secret: ${{ secrets.SP_SECRET }}
+     #   tenant_id: ${{ secrets.TENANT_ID }}
