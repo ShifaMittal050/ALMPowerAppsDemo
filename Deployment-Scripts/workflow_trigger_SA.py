@@ -9,7 +9,7 @@ SolutionType= str(sys.argv[3])
 DeploymentType= str(sys.argv[4])
 Workflow_Name= str(sys.argv[5])
 
-print( "the toke value is")
+print( "******")
 def trigger_workflow(Workflow_Name,SolutionName,SolutionType,DeploymentType):
 
       headers = {
