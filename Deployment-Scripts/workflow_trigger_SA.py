@@ -4,15 +4,13 @@ import requests
 import sys
 
 TOKEN= str(sys.argv[1])
-OWNER= str(sys.argv[2])
-REPO= str(sys.argv[3])
-Workflow_Name= str(sys.argv[4])
-pl_Baseline_Number= str(sys.argv[5])
-pl_Baseline_Revision = str(sys.argv[6])
-
+SolutionName= str(sys.argv[2])
+SolutionType= str(sys.argv[3])
+DeploymentType= str(sys.argv[4])
+Workflow_Name= str(sys.argv[5])
 
 print( "the toke value is")
-def trigger_workflow(Workflow_Name,pl_Baseline_Number,pl_Baseline_Revision):
+def trigger_workflow(Workflow_Name,SolutionName,SolutionType,DeploymentType):
 
       headers = {
         "Accept": "application/vnd.github.v3+json",
@@ -22,15 +20,16 @@ def trigger_workflow(Workflow_Name,pl_Baseline_Number,pl_Baseline_Revision):
       data = {
         "event_type": Workflow_Name,
         "client_payload": {
-          'baselinetag': pl_Baseline_Number,
-          'revision_number': pl_Baseline_Revision
+          'SolutionName': SolutionName,
+          'SolutionType': SolutionType,
+          'SolutionType': SolutionType
         }
       }
 
-      responseValue=requests.post(f"https://api.github.com/repos/{OWNER}/{REPO}/dispatches",json=data,headers=headers)
+      responseValue=requests.post(f"https://api.github.com/repos/ShifaMittal050/ALMPowerAppsDemo/dispatches",json=data,headers=headers)
       print(responseValue.content)
 
-      responsevalue=requests.post(f"https://api.github.com/repos/{OWNER}/{REPO}/dispatches",json=data,headers=headers)
+      responsevalue=requests.post(f"https://api.github.com/repos/ShifaMittal050/ALMPowerAppsDemo/dispatches",json=data,headers=headers)
       print("The respoinse message is ",responsevalue.content)
 
-trigger_workflow(Workflow_Name,pl_Baseline_Number,pl_Baseline_Revision)
+trigger_workflow(Workflow_Name,SolutionName,SolutionType,SolutionType)
