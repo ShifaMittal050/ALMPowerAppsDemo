@@ -69,7 +69,7 @@ jobs:
     # #     lfs: true
 
     # - name: Check Solution
-      if: ${{ inputs.solution1 == 'Yes' }}
+      if: ${{ inputs.solution1 == 'False' }}
       uses: ./.github/workflows/Reusable_Workflow_Import_Solutions.yml
 # jobs:
 #   call-reusable_workflow_pack_solutions_to_target_env:
