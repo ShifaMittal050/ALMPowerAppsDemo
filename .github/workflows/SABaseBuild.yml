@@ -5,7 +5,7 @@ on:
     inputs:
     
       solution1:
-        description: "solution1 from Dataverse"
+        description: "Solution 1"
         type: choice
         required: true
         options: 
@@ -13,7 +13,7 @@ on:
         - No
         
       solution_type_Solution1:
-        description: "Type of solution: Managed or Unmanaged"
+        description: "Solution 1: Managed or Unmanaged"
         required: true
         default: 'Managed'
         options: 
@@ -21,7 +21,7 @@ on:
         - Unmanaged
 
       deployment_type_Solution1:
-        description: "Update or Upgrade"
+        description: "Solution 1: Update or Upgrade"
         type: choice
         required: true
         default: 'Update'
@@ -30,7 +30,7 @@ on:
           - Update
         
       solution2:
-        description: "solution2 from Dataverse"
+        description: "solution 2"
         type: choice
         required: true
         options: 
@@ -38,7 +38,7 @@ on:
         - No
 
       solution_type_Solution2:
-        description: "Type of solution: Managed or Unmanaged"
+        description: "Solution 2: Managed or Unmanaged"
         required: true
         default: 'Managed'
         options: 
@@ -46,7 +46,7 @@ on:
         - Unmanaged
 
       deployment_type_Solution2:
-        description: "Update or Upgrade"
+        description: "Solution 2: Update or Upgrade"
         type: choice
         required: true
         default: 'Update'
@@ -54,38 +54,6 @@ on:
           - Upgrade
           - Update
  
-      # target_env:
-      #   description: "Target envrionment name(e.g. Build, QA, UAT, PROD)"
-      #   type: choice
-      #   required: true
-      #   options:
-      #     - Test
-      #     - UAT
-      #     - PROD
-
-      # deployment_type:
-      #   description: "Update or Upgrade"
-      #   type: choice
-      #   required: true
-      #   options:
-      #     - Upgrade
-      #     - Update
-          
-        
-      # run_asynchronously:
-      #   description: "Imports solution asynchronously"
-      #   type: choice
-      #   required: true
-      #   options:
-      #     - True
-      #     - False
-          
-      # async_timeout:
-      #   description: "Maximum wait time in minutes for asynchronous import"
-      #   required: true
-      #   type: string
-      #   default: '60' 
-
       
 permissions:
   contents: write
@@ -93,14 +61,18 @@ permissions:
   
 jobs:
   call-reusable_workflow_pack_solutions_to_target_env:
-     uses: ./.github/workflows/Reusable_Workflow_Import_Solutions.yml
-     with:
-       solution_names: ${{ github.event.input.solution_name }}
-       target_env: ${{ github.event.inputs.target_env }}
-       deployment_type: ${{ github.event.inputs.deployment_type }}
-       #async_deployment: ${{ github.event.inputs.run_asynchronously }}
-       async_timeout: ${{ github.event.inputs.async_timeout }}
-       solution_type:  ${{ inputs.solution_type }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check the deployment request for Solution1
+      if: ${{ inputs.solution1 == 'Yes' }}
+      uses: ./.github/workflows/Reusable_Workflow_Import_Solutions1.yml
+      # with:
+      #  solution_names: ${{ github.event.input.solution_name }}
+      #  target_env: ${{ github.event.inputs.target_env }}
+      #  deployment_type: ${{ github.event.inputs.deployment_type }}
+      #  #async_deployment: ${{ github.event.inputs.run_asynchronously }}
+      #  async_timeout: ${{ github.event.inputs.async_timeout }}
+      #  solution_type:  ${{ inputs.solution_type }}
      # secrets:
      #   target_env_url: ${{ secrets.ENVIRONMENT_URL }}
      #   client_id: ${{ secrets.APP_ID }}
