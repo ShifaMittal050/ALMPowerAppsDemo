@@ -60,9 +60,22 @@ permissions:
   pull-requests: write
   
 jobs:
-  call-reusable_workflow_pack_solutions_to_target_env:
-      if: ${{ inputs.solution1 == 'False' }}
+  import-solution:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        lfs: true
+
+    - name: Check environment not PRODUCTION
+      if: ${{ inputs.environment_url == 'https://prod.crm.dynamics.com' }}
       uses: ./.github/workflows/Reusable_Workflow_Import_Solutions.yml
+# jobs:
+#   call-reusable_workflow_pack_solutions_to_target_env:
+#     - name: Check environment not PRODUCTION
+#       if: ${{ inputs.solution1 == 'False' }}
+#       uses: ./.github/workflows/Reusable_Workflow_Import_Solutions.yml
       # with:
       #  solution_names: ${{ github.event.input.solution_name }}
       #  target_env: ${{ github.event.inputs.target_env }}
