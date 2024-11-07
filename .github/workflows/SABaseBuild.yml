@@ -63,6 +63,10 @@ jobs:
   call-reusable_workflow_pack_solutions_to_target_env:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
+      with:
+        lfs: true
+        
     - name: Check the deployment request for Solution1
       if: ${{ inputs.solution1 == 'True' }}
       uses: ./.github/workflows/Reusable_Workflow_Import_Solutions.yml
