@@ -69,7 +69,7 @@ jobs:
         lfs: true
 
     - name: Check environment not PRODUCTION
-      if: ${{ inputs.environment_url == 'https://prod.crm.dynamics.com' }}
+      if: ${{ inputs.solution1 == 'True' }}
       uses: ./.github/workflows/Reusable_Workflow_Import_Solutions.yml
 # jobs:
 #   call-reusable_workflow_pack_solutions_to_target_env:
