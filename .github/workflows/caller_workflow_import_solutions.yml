@@ -8,7 +8,7 @@ on:
         description: "JSON array of solution names"
         required: true
         type: string
-        default: '["HRDigitalAssistantDev","HR_Digital_Assistant_CandidateBot","HR_Digital_Assistant_EmployeeBot"]'
+        default: '["Solution1","Solution2","Solution3"]'
 
       solution_type:
         description: "Type of solution: Managed or Unmanaged, In most cases it will be managed. unmanaged if you are moving solution between dev environments"
