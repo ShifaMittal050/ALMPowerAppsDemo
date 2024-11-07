@@ -61,7 +61,7 @@ permissions:
   
 jobs:
   call-reusable_workflow_pack_solutions_to_target_env:
-      if: ${{ inputs.solution1 == 'True' }}
+      if: ${{ inputs.solution1 == 'False' }}
       uses: ./.github/workflows/Reusable_Workflow_Import_Solutions.yml
       # with:
       #  solution_names: ${{ github.event.input.solution_name }}
