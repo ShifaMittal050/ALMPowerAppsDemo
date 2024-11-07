@@ -1,4 +1,4 @@
-name: caller_workflow_import_solutions_to_target_env
+name: caller_workflow_Build_Solution
 
 on:
   workflow_dispatch:
@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check the deployment request for Solution1
-      if: ${{ inputs.solution1 == 'Yes' }}
+      if: ${{ inputs.solution1 == 'True' }}
       uses: ./.github/workflows/Reusable_Workflow_Import_Solutions1.yml
       # with:
       #  solution_names: ${{ github.event.input.solution_name }}
