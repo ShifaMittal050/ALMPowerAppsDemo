@@ -64,7 +64,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        solution_name: ["HR_Digital_Assistant_EmployeeBot","HR_Digital_Assistant_CandidateBot","HRDigitalAssistantDev"]
+        solution_name: ["Solution1","Solution2","Solution3"]
     runs-on: Windows-latest
     environment:
       name: ${{ github.event.inputs.target_env }} 
