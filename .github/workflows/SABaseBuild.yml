@@ -58,19 +58,53 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  
+
 jobs:
-  import-solution:
-    # # runs-on: ubuntu-latest
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env: 
+      pat_token: ${{ secrets.REPO_TOKEN }}
+      Solution1Name: "solution1"
+      Solution2Name: "solution2"
+      Solution1WorkflowName: ""
 
-    # # steps:
-    # # - uses: actions/checkout@v2
-    # #   with:
-    # #     lfs: true
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
 
-    # - name: Check Solution
-      if: ${{ inputs.solution1 == 'No' }}
-      uses: ./.github/workflows/Reusable_Workflow_Import_Solutions.yml
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+         python-version: 3.8 #install the python needed
+         
+      - name: Install dependencies
+        run: |
+           cd "$GITHUB_WORKSPACE/Deployment-Scripts/"
+           python -m pip install --upgrade pip
+           pip install -r requirements.txt
+          
+      - name: Trigger the Workflow
+        if: ${{ inputs.solution1 == 'True' }}
+        run: |
+         cd "$GITHUB_WORKSPACE/Deployment-Scripts/"
+         python $GITHUB_WORKSPACE/Deployment-Scripts/workflow_trigger_SA.py ${{ env.pat_token }}  ${{ env.Solution1Name}}  ${{ github.event.inputs.solution_type_Solution1}} ${{ github.event.inputs.deployment_type_Solution1}} ${{ env.Solution1WorkflowName}}
+  
+# jobs:
+#   import-solution:
+#     # # runs-on: ubuntu-latest
+
+#     # # steps:
+#     # # - uses: actions/checkout@v2
+#     # #   with:
+#     # #     lfs: true
+
+#     # - name: Check Solution
+#       if: ${{ inputs.solution1 == 'No' }}
+#       uses: ./.github/workflows/Reusable_Workflow_Import_Solutions.yml
 # jobs:
 #   call-reusable_workflow_pack_solutions_to_target_env:
 #     - name: Check environment not PRODUCTION
