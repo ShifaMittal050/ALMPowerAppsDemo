@@ -65,7 +65,7 @@ jobs:
     steps:
     - name: Check the deployment request for Solution1
       if: ${{ inputs.solution1 == 'True' }}
-      uses: ./.github/workflows/Reusable_Workflow_Import_Solutions1.yml
+      uses: ./.github/workflows/Reusable_Workflow_Import_Solutions.yml
       # with:
       #  solution_names: ${{ github.event.input.solution_name }}
       #  target_env: ${{ github.event.inputs.target_env }}
