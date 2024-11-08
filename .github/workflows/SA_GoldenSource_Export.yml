@@ -1,0 +1,162 @@
+name: GoldenSource-export-solutions
+# Export solutions dynamically from "Dev" environment and unpack them into "Solutions" folder
+
+on:
+  workflow_dispatch:
+    inputs:
+      # Change this value
+      solution_names:
+        description: "JSON array of solution names"
+        required: true
+        type: string
+        #default: '["HR_Digital_Assistant_EmployeeBot","HR_Digital_Assistant_CandidateBot","HRDigitalAssistantDev"]'
+        
+      source_env:
+        description: "Source envrionment name(e.g. DEV, TEST, UAT, PROD)"
+        type: choice
+        required: true
+        options:
+          - Dev
+          - Test
+          - UAT
+          - PROD
+        default: 'Dev'
+    
+      solution_exported_folder:
+        description: 'folder name for staging the exported solution *do not change*'
+        required: true
+        default: /out/Export
+        
+      solution_folder:
+        description: 'staging the unpacked solution folder before check-in *do not change*'
+        required: true
+        default: Solutions
+  
+      manage-type:
+        description: "Managed"
+        type: choice
+        required: true
+        options:
+          - true
+          - false
+        default: true
+        
+  release:
+    types: [created]
+
+
+permissions:
+  contents: write
+jobs:
+  export-from-dev:
+    strategy:
+      max-parallel: 1
+      matrix:
+        solution_names: ${{ fromJSON(github.event.inputs.solution_names) }}  # Use fromJson to parse JSON array
+    runs-on: windows-latest
+    environment:
+      name: ${{ github.event.inputs.source_env }} 
+      
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        lfs: true
+        
+    - name: Install Power Platform Tools
+      uses: microsoft/powerplatform-actions/actions-install@v1
+      
+    - name: who-am-i 
+      uses: microsoft/powerplatform-actions/who-am-i@v0
+      with:
+        environment-url: ${{secrets.ENVIRONMENT_URL}}
+        app-id: ${{secrets.APP_ID}}
+        client-secret: ${{ secrets.SP_SECRET }}
+        tenant-id: ${{secrets.TENANT_ID}}
+
+
+        
+    - name: Export solution as managed
+      uses: microsoft/powerplatform-actions/export-solution@v0
+      with:
+        environment-url: ${{secrets.ENVIRONMENT_URL}}
+        app-id: ${{secrets.APP_ID}}
+        client-secret: ${{ secrets.SP_SECRET }}
+        tenant-id: ${{secrets.TENANT_ID}}
+        solution-name: ${{ matrix.solution_names }}
+        managed: ${{ github.event.inputs.manage-type }}
+        solution-output-file: ${{inputs.solution_exported_folder }}/${{ matrix.solution_names }}.zip
+
+    - name: check-solution action
+      uses: microsoft/powerplatform-actions/check-solution@v1
+      with:
+        environment-url: ${{secrets.ENVIRONMENT_URL}}
+        app-id: ${{secrets.APP_ID}}
+        client-secret: ${{ secrets.SP_SECRET }}
+        tenant-id: ${{secrets.TENANT_ID}}
+        path:  ${{inputs.solution_exported_folder }}/${{ matrix.solution_names }}.zip
+
+        
+    # - name: unpack solutions action managed
+    #   uses: microsoft/powerplatform-actions/unpack-solution@v0.10.3
+    #   with:
+    #     solution-file: ${{inputs.solution_exported_folder }}/${{ matrix.solution_names }}.zip
+    #     solution-folder:  ${{ github.event.inputs.solution_folder}}/${{ matrix.solution_names }}
+    #     solution-type: "Managed"
+    #     overwrite-files: true
+        
+    # - name: Put current date into a variable
+    #   run: |
+    #      $curr_date=& Get-Date -format yyyy-MM-dd
+    #      echo "curr_date=$curr_date" >> $env:GITHUB_ENV
+
+    # - name: Create folder
+    #   run: |
+    #     $folderName = "Build-${{env.curr_date}}-${{ github.run_number }}"
+    #     echo "artifact_directory=$folderName" >> $env:GITHUB_ENV
+    #     echo "Set artifact_directory to $folderName"
+       
+    # - name: Create archive-artifacts directory
+    #   run: |
+    #      mkdir -p Artifacts/${{ env.artifact_directory }}
+    #      ls Artifacts
+          
+    # - name: List directories and subdirectories
+    #   shell: pwsh  # Use PowerShell for Windows
+    #   run: |
+    #       Set-Location -Path ./Artifacts
+    #       Get-ChildItem -Directory -Recurse | Select-Object FullName
+
+         
+    # - name: Upload Artifacts
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: ManagedSolutions
+    #     path:   ${{inputs.solution_exported_folder }}/*.zip
+
+    # - name: Download artifacts
+    #   uses: actions/download-artifact@v2
+    #   with:
+    #     name: ManagedSolutions
+    #     path: Artifacts/$folderName
+        
+
+    # - name: Build artifact
+    #   run: |
+    #     # Your build commands here
+    #     xcopy ${{ github.event.inputs.solution_folder }}\* Artifacts\${{ env.artifact_directory }} /E /Y
+    #     dir Artifacts\${{ env.artifact_directory }}
+
+    #     # cp  ${{ github.event.inputs.solution_folder}}/* Artifacts/${{ env.artifact_directory }}
+    #     # ls Artifacts/${{ env.artifact_directory }}
+        
+
+   
+    # - name: Git Fetch and Commit 
+    #   run: | 
+    #     git config --global user.email "no-reply@github.com"
+    #     git config --global user.name "GitHub Actions"
+    #     git status
+    #     git add Artifacts/${{ env.artifact_directory }}
+    #     git commit -m "Archive artifacts"
+    #     git push -u origin Development
+
