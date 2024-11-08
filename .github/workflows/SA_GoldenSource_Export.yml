@@ -5,8 +5,8 @@ on:
   workflow_dispatch:
 env: 
     pat_token: ${{ secrets.REPO_TOKEN }}
-    Solution1name: "ALMTest1"
-    Solution2Name: "ALMTest1"
+    Solution1name: '["HR_Digital_Assistant_EmployeeBot","HR_Digital_Assistant_CandidateBot","HRDigitalAssistantDev"]'
+    #Solution2Name: "ALMTest1"
         
 permissions:
   contents: write
@@ -15,7 +15,9 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        solution_names: "${{ env.Solution1name }},${{ env.Solution2Name }}"
+        #solution_names: "${{ env.Solution1name }},${{ env.Solution2Name }}"
+    
+        solution_names: ${{ fromJSON(env.Solution1name) }}
     runs-on: windows-latest
       
     steps:
