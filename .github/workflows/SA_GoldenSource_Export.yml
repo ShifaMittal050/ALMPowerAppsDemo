@@ -3,48 +3,11 @@ name: GoldenSource-export-solutions
 
 on:
   workflow_dispatch:
-    inputs:
-      # Change this value
-      solution_names:
-        description: "JSON array of solution names"
-        required: true
-        type: string
-        #default: '["HR_Digital_Assistant_EmployeeBot","HR_Digital_Assistant_CandidateBot","HRDigitalAssistantDev"]'
+env: 
+    pat_token: ${{ secrets.REPO_TOKEN }}
+    Solution1name: "ALMTest1"
+    Solution2Name: "ALMTest1"
         
-      source_env:
-        description: "Source envrionment name(e.g. DEV, TEST, UAT, PROD)"
-        type: choice
-        required: true
-        options:
-          - Dev
-          - Test
-          - UAT
-          - PROD
-        default: 'Dev'
-    
-      solution_exported_folder:
-        description: 'folder name for staging the exported solution *do not change*'
-        required: true
-        default: /out/Export
-        
-      solution_folder:
-        description: 'staging the unpacked solution folder before check-in *do not change*'
-        required: true
-        default: Solutions
-  
-      manage-type:
-        description: "Managed"
-        type: choice
-        required: true
-        options:
-          - true
-          - false
-        default: true
-        
-  release:
-    types: [created]
-
-
 permissions:
   contents: write
 jobs:
@@ -52,10 +15,8 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        solution_names: ${{ fromJSON(github.event.inputs.solution_names) }}  # Use fromJson to parse JSON array
+        solution_names: ${{ env.Solution1name }},${{ env.Solution2Name }}
     runs-on: windows-latest
-    environment:
-      name: ${{ github.event.inputs.source_env }} 
       
     steps:
     - uses: actions/checkout@v3
@@ -64,36 +25,36 @@ jobs:
         
     - name: Install Power Platform Tools
       uses: microsoft/powerplatform-actions/actions-install@v1
-      
-    - name: who-am-i 
+
+    - name: who-am-i action
       uses: microsoft/powerplatform-actions/who-am-i@v0
       with:
-        environment-url: ${{secrets.ENVIRONMENT_URL}}
-        app-id: ${{secrets.APP_ID}}
-        client-secret: ${{ secrets.SP_SECRET }}
-        tenant-id: ${{secrets.TENANT_ID}}
+        environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
+        app-id: ${{ vars.CLIENT_ID }}
+        client-secret: ${{ secrets.PowerPlatformSPN1 }}
+        tenant-id: ${{ vars.TENANT_ID }}
 
-
-        
     - name: Export solution as managed
       uses: microsoft/powerplatform-actions/export-solution@v0
       with:
-        environment-url: ${{secrets.ENVIRONMENT_URL}}
-        app-id: ${{secrets.APP_ID}}
-        client-secret: ${{ secrets.SP_SECRET }}
-        tenant-id: ${{secrets.TENANT_ID}}
+        environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
+        app-id: ${{ vars.CLIENT_ID }}
+        client-secret: ${{ secrets.PowerPlatformSPN1 }}
+        tenant-id: ${{ vars.TENANT_ID }}
         solution-name: ${{ matrix.solution_names }}
-        managed: ${{ github.event.inputs.manage-type }}
-        solution-output-file: ${{inputs.solution_exported_folder }}/${{ matrix.solution_names }}.zip
-
-    - name: check-solution action
-      uses: microsoft/powerplatform-actions/check-solution@v1
-      with:
-        environment-url: ${{secrets.ENVIRONMENT_URL}}
-        app-id: ${{secrets.APP_ID}}
-        client-secret: ${{ secrets.SP_SECRET }}
-        tenant-id: ${{secrets.TENANT_ID}}
-        path:  ${{inputs.solution_exported_folder }}/${{ matrix.solution_names }}.zip
+        solution-output-file: ${{ github.event.repository.name }}/Artifacts/${{ steps.date.outputs.date }}/Managed/${{ matrix.solution_names }}.zip
+        #solution-output-file: /out/Export/${{ matrix.solution_names }}.zip
+        overwrite: true
+        managed: true
+        
+    # - name: check-solution action
+    #   uses: microsoft/powerplatform-actions/check-solution@v1
+    #   with:
+    #     environment-url: ${{secrets.ENVIRONMENT_URL}}
+    #     app-id: ${{secrets.APP_ID}}
+    #     client-secret: ${{ secrets.SP_SECRET }}
+    #     tenant-id: ${{secrets.TENANT_ID}}
+    #     path:  ${{inputs.solution_exported_folder }}/${{ matrix.solution_names }}.zip
 
         
     # - name: unpack solutions action managed
