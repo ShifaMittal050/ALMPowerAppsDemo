@@ -3,11 +3,7 @@ name: GoldenSource-export-solutions
 
 on:
   workflow_dispatch:
-env: 
-    pat_token: ${{ secrets.REPO_TOKEN }}
-    Solution1name: '["HR_Digital_Assistant_EmployeeBot","HR_Digital_Assistant_CandidateBot","HRDigitalAssistantDev"]'
-    #Solution2Name: "ALMTest1"
-        
+
 permissions:
   contents: write
 jobs:
@@ -15,9 +11,8 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        #solution_names: "${{ env.Solution1name }},${{ env.Solution2Name }}"
-    
-        solution_names: ${{ fromJSON(env.Solution1name) }}
+        solution_names: ["ALMTest1","ALMTest1"]
+  
     runs-on: windows-latest
       
     steps:
