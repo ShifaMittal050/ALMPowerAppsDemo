@@ -20,6 +20,17 @@ jobs:
       with:
         lfs: true
         
+    - name: Put current date into a variable
+      run: |
+         $curr_date=& Get-Date -format yyyy-MM-dd
+         echo "curr_date=$curr_date" >> $env:GITHUB_ENV
+
+    - name: Create folder
+      run: |
+        $folderName = "Build-${{env.curr_date}}-${{ github.run_number }}"
+        echo "artifact_directory=$folderName" >> $env:GITHUB_ENV
+        echo "Set artifact_directory to $folderName"  
+        
     - name: Install Power Platform Tools
       uses: microsoft/powerplatform-actions/actions-install@v1
 
@@ -45,24 +56,49 @@ jobs:
         managed: true
 
         
-    - name: unpack solutions action managed
+    - name: Unpack managed solution
       uses: microsoft/powerplatform-actions/unpack-solution@v0.10.3
       with:
         solution-file: /out/Export/${{ matrix.solution_names }}.zip
-        solution-folder:  /out/Export/${{ matrix.solution_names }}
+        solution-folder: ${{ github.event.repository.name }}/Artifacts/$folderName/Managed/${{ matrix.solution_names }}
         solution-type: "Managed"
         overwrite-files: true
-        
-    - name: Put current date into a variable
-      run: |
-         $curr_date=& Get-Date -format yyyy-MM-dd
-         echo "curr_date=$curr_date" >> $env:GITHUB_ENV
 
-    - name: Create folder
-      run: |
-        $folderName = "Build-${{env.curr_date}}-${{ github.run_number }}"
-        echo "artifact_directory=$folderName" >> $env:GITHUB_ENV
-        echo "Set artifact_directory to $folderName"
+    - name: Export solution as unmanaged
+      uses: microsoft/powerplatform-actions/export-solution@v0
+      with:
+        environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
+        app-id: ${{ vars.CLIENT_ID }}
+        client-secret: ${{ secrets.PowerPlatformSPN1 }}
+        tenant-id: ${{ vars.TENANT_ID }}
+        solution-name: ${{ matrix.solution_names }}
+        #solution-output-file: ${{ github.event.repository.name }}/Artifacts/${{ steps.date.outputs.date }}/Unmanaged/ALMLab.zip
+        solution-output-file: /out/Export/${{ matrix.solution_names }}.zip
+        overwrite: true
+        managed: false
+
+    - name: unpack-solution-Unmanaged action
+      uses: microsoft/powerplatform-actions/unpack-solution@v0
+      with:
+        #solution-file: ${{ github.event.repository.name }}/Artifacts/${{ steps.date.outputs.date }}/Unmanaged/ALMLab.zip
+        #solution-folder: ${{ github.event.repository.name }}/Artifacts/${{ steps.date.outputs.date }}/Unmanaged/ALMLab
+        #solution-folder: Solutions/${{ matrix.solution_names }}/Managed
+        solution-file: /out/Export/${{ matrix.solution_names }}.zip
+        solution-folder: Solutions/${{ matrix.solution_names }}/Unmanaged
+        solution-type: "Unmanaged"
+        overwrite-files: true
+
+        
+    # - name: Put current date into a variable
+    #   run: |
+    #      $curr_date=& Get-Date -format yyyy-MM-dd
+    #      echo "curr_date=$curr_date" >> $env:GITHUB_ENV
+
+    # - name: Create folder
+    #   run: |
+    #     $folderName = "Build-${{env.curr_date}}-${{ github.run_number }}"
+    #     echo "artifact_directory=$folderName" >> $env:GITHUB_ENV
+    #     echo "Set artifact_directory to $folderName"
        
     # - name: Create archive-artifacts directory
     #   run: |
