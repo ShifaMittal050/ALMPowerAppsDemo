@@ -39,39 +39,30 @@ jobs:
         client-secret: ${{ secrets.PowerPlatformSPN1 }}
         tenant-id: ${{ vars.TENANT_ID }}
         solution-name: ${{ matrix.solution_names }}
-        solution-output-file: ${{ github.event.repository.name }}/Artifacts/${{ steps.date.outputs.date }}/Managed/${{ matrix.solution_names }}.zip
-        #solution-output-file: /out/Export/${{ matrix.solution_names }}.zip
+        #solution-output-file: ${{ github.event.repository.name }}/Artifacts/${{ steps.date.outputs.date }}/Managed/${{ matrix.solution_names }}.zip
+        solution-output-file: /out/Export/${{ matrix.solution_names }}.zip
         overwrite: true
         managed: true
-        
-    # - name: check-solution action
-    #   uses: microsoft/powerplatform-actions/check-solution@v1
-    #   with:
-    #     environment-url: ${{secrets.ENVIRONMENT_URL}}
-    #     app-id: ${{secrets.APP_ID}}
-    #     client-secret: ${{ secrets.SP_SECRET }}
-    #     tenant-id: ${{secrets.TENANT_ID}}
-    #     path:  ${{inputs.solution_exported_folder }}/${{ matrix.solution_names }}.zip
 
         
-    # - name: unpack solutions action managed
-    #   uses: microsoft/powerplatform-actions/unpack-solution@v0.10.3
-    #   with:
-    #     solution-file: ${{inputs.solution_exported_folder }}/${{ matrix.solution_names }}.zip
-    #     solution-folder:  ${{ github.event.inputs.solution_folder}}/${{ matrix.solution_names }}
-    #     solution-type: "Managed"
-    #     overwrite-files: true
+    - name: unpack solutions action managed
+      uses: microsoft/powerplatform-actions/unpack-solution@v0.10.3
+      with:
+        solution-file: /out/Export/${{ matrix.solution_names }}.zip
+        solution-folder:  /out/Export/${{ matrix.solution_names }}
+        solution-type: "Managed"
+        overwrite-files: true
         
-    # - name: Put current date into a variable
-    #   run: |
-    #      $curr_date=& Get-Date -format yyyy-MM-dd
-    #      echo "curr_date=$curr_date" >> $env:GITHUB_ENV
+    - name: Put current date into a variable
+      run: |
+         $curr_date=& Get-Date -format yyyy-MM-dd
+         echo "curr_date=$curr_date" >> $env:GITHUB_ENV
 
-    # - name: Create folder
-    #   run: |
-    #     $folderName = "Build-${{env.curr_date}}-${{ github.run_number }}"
-    #     echo "artifact_directory=$folderName" >> $env:GITHUB_ENV
-    #     echo "Set artifact_directory to $folderName"
+    - name: Create folder
+      run: |
+        $folderName = "Build-${{env.curr_date}}-${{ github.run_number }}"
+        echo "artifact_directory=$folderName" >> $env:GITHUB_ENV
+        echo "Set artifact_directory to $folderName"
        
     # - name: Create archive-artifacts directory
     #   run: |
