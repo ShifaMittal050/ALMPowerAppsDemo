@@ -15,7 +15,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        solution_names: ${{ env.Solution1name }},${{ env.Solution2Name }}
+        solution_names: "${{ env.Solution1name }},${{ env.Solution2Name }}"
     runs-on: windows-latest
       
     steps:
