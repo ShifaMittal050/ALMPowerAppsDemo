@@ -17,70 +17,6 @@ jobs:
       with:
         lfs: true
         
-    - name: Put current date into a variable
-      run: |
-         $curr_date=& Get-Date -format yyyy-MM-dd
-         echo "curr_date=$curr_date" >> $env:GITHUB_ENV
-
-    - name: Create folder
-      run: |
-        $folderName = "Build-${{env.curr_date}}-${{ github.run_number }}"
-        echo "artifact_directory=$folderName" >> $env:GITHUB_ENV
-        echo "Set artifact_directory to $folderName"  
-        
-    - name: Install Power Platform Tools
-      uses: microsoft/powerplatform-actions/actions-install@v1
-
-    - name: who-am-i action
-      uses: microsoft/powerplatform-actions/who-am-i@v0
-      with:
-        environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
-        app-id: ${{ vars.CLIENT_ID }}
-        client-secret: ${{ secrets.PowerPlatformSPN1 }}
-        tenant-id: ${{ vars.TENANT_ID }}
-
-    - name: Export solution as managed
-      uses: microsoft/powerplatform-actions/export-solution@v0
-      with:
-        environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
-        app-id: ${{ vars.CLIENT_ID }}
-        client-secret: ${{ secrets.PowerPlatformSPN1 }}
-        tenant-id: ${{ vars.TENANT_ID }}
-        solution-name: ${{ matrix.solution_names }}
-        solution-output-file: /out/Export/${{ matrix.solution_names }}.zip
-        overwrite: true
-        managed: true
-
-        
-    - name: Unpack managed solution
-      uses: microsoft/powerplatform-actions/unpack-solution@v0.10.3
-      with:
-        solution-file: /out/Export/${{ matrix.solution_names }}.zip
-        solution-folder: Artifacts/${{ env.artifact_directory }}/${{ matrix.solution_names }}/Managed
-        solution-type: "Managed"
-        overwrite-files: true
-
-    # - name: Export solution as unmanaged
-    #   uses: microsoft/powerplatform-actions/export-solution@v0
-    #   with:
-    #     environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
-    #     app-id: ${{ vars.CLIENT_ID }}
-    #     client-secret: ${{ secrets.PowerPlatformSPN1 }}
-    #     tenant-id: ${{ vars.TENANT_ID }}
-    #     solution-name: ${{ matrix.solution_names }}
-    #     solution-output-file: /out/Export/${{ matrix.solution_names }}.zip
-    #     overwrite: true
-    #     managed: false
-
-    # - name: unpack-solution-Unmanaged action
-    #   uses: microsoft/powerplatform-actions/unpack-solution@v0
-    #   with:
-    #     solution-file: /out/Export/${{ matrix.solution_names }}.zip
-    #     solution-folder: Solutions/${{ matrix.solution_names }}/Unmanaged
-    #     solution-type: "Unmanaged"
-    #     overwrite-files: true
-
-        
     # - name: Put current date into a variable
     #   run: |
     #      $curr_date=& Get-Date -format yyyy-MM-dd
@@ -90,50 +26,114 @@ jobs:
     #   run: |
     #     $folderName = "Build-${{env.curr_date}}-${{ github.run_number }}"
     #     echo "artifact_directory=$folderName" >> $env:GITHUB_ENV
-    #     echo "Set artifact_directory to $folderName"
+    #     echo "Set artifact_directory to $folderName"  
+        
+    # - name: Install Power Platform Tools
+    #   uses: microsoft/powerplatform-actions/actions-install@v1
+
+    # - name: who-am-i action
+    #   uses: microsoft/powerplatform-actions/who-am-i@v0
+    #   with:
+    #     environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
+    #     app-id: ${{ vars.CLIENT_ID }}
+    #     client-secret: ${{ secrets.PowerPlatformSPN1 }}
+    #     tenant-id: ${{ vars.TENANT_ID }}
+
+    # - name: Export solution as managed
+    #   uses: microsoft/powerplatform-actions/export-solution@v0
+    #   with:
+    #     environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
+    #     app-id: ${{ vars.CLIENT_ID }}
+    #     client-secret: ${{ secrets.PowerPlatformSPN1 }}
+    #     tenant-id: ${{ vars.TENANT_ID }}
+    #     solution-name: ${{ matrix.solution_names }}
+    #     solution-output-file: /out/Export/${{ matrix.solution_names }}.zip
+    #     overwrite: true
+    #     managed: true
+
+        
+    # - name: Unpack managed solution
+    #   uses: microsoft/powerplatform-actions/unpack-solution@v0.10.3
+    #   with:
+    #     solution-file: /out/Export/${{ matrix.solution_names }}.zip
+    #     solution-folder: Artifacts/${{ env.artifact_directory }}/${{ matrix.solution_names }}/Managed
+    #     solution-type: "Managed"
+    #     overwrite-files: true
+
+    # # - name: Export solution as unmanaged
+    # #   uses: microsoft/powerplatform-actions/export-solution@v0
+    # #   with:
+    # #     environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
+    # #     app-id: ${{ vars.CLIENT_ID }}
+    # #     client-secret: ${{ secrets.PowerPlatformSPN1 }}
+    # #     tenant-id: ${{ vars.TENANT_ID }}
+    # #     solution-name: ${{ matrix.solution_names }}
+    # #     solution-output-file: /out/Export/${{ matrix.solution_names }}.zip
+    # #     overwrite: true
+    # #     managed: false
+
+    # # - name: unpack-solution-Unmanaged action
+    # #   uses: microsoft/powerplatform-actions/unpack-solution@v0
+    # #   with:
+    # #     solution-file: /out/Export/${{ matrix.solution_names }}.zip
+    # #     solution-folder: Solutions/${{ matrix.solution_names }}/Unmanaged
+    # #     solution-type: "Unmanaged"
+    # #     overwrite-files: true
+
+        
+    # # - name: Put current date into a variable
+    # #   run: |
+    # #      $curr_date=& Get-Date -format yyyy-MM-dd
+    # #      echo "curr_date=$curr_date" >> $env:GITHUB_ENV
+
+    # # - name: Create folder
+    # #   run: |
+    # #     $folderName = "Build-${{env.curr_date}}-${{ github.run_number }}"
+    # #     echo "artifact_directory=$folderName" >> $env:GITHUB_ENV
+    # #     echo "Set artifact_directory to $folderName"
        
-    # - name: Create archive-artifacts directory
-    #   run: |
-    #      mkdir -p Artifacts/${{ env.artifact_directory }}
-    #      ls Artifacts
+    # # - name: Create archive-artifacts directory
+    # #   run: |
+    # #      mkdir -p Artifacts/${{ env.artifact_directory }}
+    # #      ls Artifacts
           
-    # - name: List directories and subdirectories
-    #   shell: pwsh  # Use PowerShell for Windows
-    #   run: |
-    #       Set-Location -Path ./Artifacts
-    #       Get-ChildItem -Directory -Recurse | Select-Object FullName
+    # # - name: List directories and subdirectories
+    # #   shell: pwsh  # Use PowerShell for Windows
+    # #   run: |
+    # #       Set-Location -Path ./Artifacts
+    # #       Get-ChildItem -Directory -Recurse | Select-Object FullName
 
          
-    # - name: Upload Artifacts
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: ManagedSolutions
-    #     path:   ${{inputs.solution_exported_folder }}/*.zip
+    # # - name: Upload Artifacts
+    # #   uses: actions/upload-artifact@v2
+    # #   with:
+    # #     name: ManagedSolutions
+    # #     path:   ${{inputs.solution_exported_folder }}/*.zip
 
-    # - name: Download artifacts
-    #   uses: actions/download-artifact@v2
-    #   with:
-    #     name: ManagedSolutions
-    #     path: Artifacts/$folderName
+    # # - name: Download artifacts
+    # #   uses: actions/download-artifact@v2
+    # #   with:
+    # #     name: ManagedSolutions
+    # #     path: Artifacts/$folderName
         
 
-    # - name: Build artifact
-    #   run: |
-    #     # Your build commands here
-    #     xcopy ${{ github.event.inputs.solution_folder }}\* Artifacts\${{ env.artifact_directory }} /E /Y
-    #     dir Artifacts\${{ env.artifact_directory }}
+    # # - name: Build artifact
+    # #   run: |
+    # #     # Your build commands here
+    # #     xcopy ${{ github.event.inputs.solution_folder }}\* Artifacts\${{ env.artifact_directory }} /E /Y
+    # #     dir Artifacts\${{ env.artifact_directory }}
 
-    #     # cp  ${{ github.event.inputs.solution_folder}}/* Artifacts/${{ env.artifact_directory }}
-    #     # ls Artifacts/${{ env.artifact_directory }}
+    # #     # cp  ${{ github.event.inputs.solution_folder}}/* Artifacts/${{ env.artifact_directory }}
+    # #     # ls Artifacts/${{ env.artifact_directory }}
         
 
    
-    # - name: Git Fetch and Commit 
-    #   run: | 
-    #     git config --global user.email "no-reply@github.com"
-    #     git config --global user.name "GitHub Actions"
-    #     git status
-    #     git add Artifacts/${{ env.artifact_directory }}
-    #     git commit -m "Archive artifacts"
-    #     git push -u origin Development
+    # # - name: Git Fetch and Commit 
+    # #   run: | 
+    # #     git config --global user.email "no-reply@github.com"
+    # #     git config --global user.name "GitHub Actions"
+    # #     git status
+    # #     git add Artifacts/${{ env.artifact_directory }}
+    # #     git commit -m "Archive artifacts"
+    # #     git push -u origin Development
 
