@@ -16,14 +16,15 @@ jobs:
       env:
           JF_URL: ${{ secrets.JF_URL }}
           JF_ACCESS_TOKEN: ${{ secrets.JF_PROJECT }}
-          
-    - name: Push Build to Artifactory
-      run: |
-       echo "test file " > test.txt
-       export BUILD_NAME="my-build"
-       export BUILD_MODULE="my-module"
-       export BUILD_NUMBER="1"
+    - run: |
+         jf rt ping    
+    # - name: Push Build to Artifactory
+    #   run: |
+    #    echo "test file " > test.txt
+    #    export BUILD_NAME="my-build"
+    #    export BUILD_MODULE="my-module"
+    #    export BUILD_NUMBER="1"
 
-       export PATH_TO_DIRECTORY="name/version/dates"
+    #    export PATH_TO_DIRECTORY="name/version/dates"
       
-       jf rt upload "test.txt" ALMPowerAppsDemo/$PATH_TO_DIRECTORY --build-name $BUILD_NAME --build-number $BUILD_NUMBER --module $BUILD_MODULE
+    #    jf rt upload "test.txt" ALMPowerAppsDemo/$PATH_TO_DIRECTORY --build-name $BUILD_NAME --build-number $BUILD_NUMBER --module $BUILD_MODULE
