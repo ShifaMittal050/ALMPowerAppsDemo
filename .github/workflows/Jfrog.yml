@@ -10,7 +10,14 @@ jobs:
 
   steps:
     - uses: actions/checkout@v4
-    
+
+    - uses: jfrog/setup-jfrog-cli@v4
+      env:
+       JF_URL: ${{ vars.JF_URL }}
+       JF_ACCESS_TOKEN: ${{ secrets.ARTIFACTORY_ACCESS_TOKEN }} 
+
+
+       
     - name: Install JFrog
       uses: jfrog/setup-jfrog-cli@v3
       env:
@@ -18,6 +25,7 @@ jobs:
           JF_ACCESS_TOKEN: ${{ secrets.JF_PROJECT }}
     - run: |
          jf rt ping    
+    
     # - name: Push Build to Artifactory
     #   run: |
     #    echo "test file " > test.txt
