@@ -5,7 +5,7 @@ on:
     inputs:
       solutions: 
         description: 'Comma-separated list of solutions to export'
-        default: 'ALMTest1 ALMTest1'
+        default: 'ALMTest1 ALMTest2'
       run_no:
         description: 'Build no. of the artifacts uploaded in the repository'
         required: true
@@ -37,7 +37,7 @@ jobs:
     steps:
       - name: build
         run: |
-          echo "Product ${{ matrix.solution }}"
+          echo "Solution: ${{ matrix.solution }}"
       - name: Checkout repository
         uses: actions/checkout@v4
               
