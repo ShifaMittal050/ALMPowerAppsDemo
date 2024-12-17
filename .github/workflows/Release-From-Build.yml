@@ -5,7 +5,7 @@ on:
     inputs:
       solutions: 
         description: 'Comma-separated list of solutions to export'
-        default: 'SignatureAviationBase AnotherSolution'
+        default: 'ALMTest1 ALMTest1'
       run_no:
         description: 'Build no. of the artifacts uploaded in the repository'
         required: true
@@ -22,24 +22,36 @@ jobs:
           solutions=$(echo '"${{ github.event.inputs.solutions }}"' | jq -c '. | split(" ") | map(select(length > 0))')
           echo "solutions=$solutions" >> $GITHUB_OUTPUT
           
- # Deploy-SIT1:
- #    #needs: setup_matrix
- #    #needs: [defineBuilds, build]
- #    runs-on: windows-latest
- #    strategy:
- #      #max-parallel: 1
- #      matrix:
- #        solution: ${{ fromJson(inputs.solutions) }}
- #    # environment:
- #    #   name: SIT1
- #    #   url: https://orgbf941a56.crm.dynamics.com/
+ Deploy-SIT1:
+    needs: init
+    #needs: [defineBuilds, build]
+    runs-on: windows-latest
+    strategy:
+      max-parallel: 1
+      matrix:
+        solution: ${{ fromJson(inputs.solutions) }}
+    # environment:
+    #   name: SIT1
+    #   url: https://orgbf941a56.crm.dynamics.com/
 
- #    steps:
- #      - name: Checkout repository
- #        uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
               
- #      - name: Install Power Platform Tools
- #        uses: microsoft/powerplatform-actions/actions-install@v1
+      - name: Install Power Platform Tools
+        uses: microsoft/powerplatform-actions/actions-install@v1
+
+      - name: Export solution as managed
+        uses: microsoft/powerplatform-actions/export-solution@v0
+        with:
+          environment-url: 'https://orgfc38be7b.crm8.dynamics.com/'
+          app-id: ${{ vars.CLIENT_ID }}
+          client-secret: ${{ secrets.PowerPlatformSPN1 }}
+          tenant-id: ${{ vars.TENANT_ID }}
+          solution-name: ${{ matrix.solution }}
+          solution-output-file: /out/Export/${{ matrix.solution}}.zip
+          overwrite: true
+          managed: true
                  
  #      - name: Import solution - ${{ matrix.solution }}
  #        uses: microsoft/powerplatform-actions/import-solution@v1
