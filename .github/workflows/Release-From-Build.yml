@@ -29,12 +29,15 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        solution: ${{ fromJson(inputs.solutions) }}
+        solution: ${{ fromJSON(needs.init.outputs.solutions)}}
     # environment:
     #   name: SIT1
     #   url: https://orgbf941a56.crm.dynamics.com/
 
     steps:
+      - name: build
+        run: |
+          echo "Product ${{ matrix.solution }}"
       - name: Checkout repository
         uses: actions/checkout@v4
               
